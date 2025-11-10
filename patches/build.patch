@@ -1,0 +1,26 @@
+--- BUILD.md	2025-11-01 04:16:07.955656902 +0300
++++ BUILD.md	2025-11-10 19:05:59.198040032 +0300
+@@ -123,15 +123,14 @@
+ 
+ ## 🪟 Building Hashcat for Windows
+ 
+-| Method                                 | Documentation                        |
+-|----------------------------------------|--------------------------------------|
+-| From macOS                             | [BUILD_macOS.md](BUILD_macOS.md)     |
+-| Using Windows Subsystem for Linux (WSL)| [BUILD_WSL.md](BUILD_WSL.md)         |
+-| Using Cygwin                           | [BUILD_CYGWIN.md](BUILD_CYGWIN.md)   |
+-| Using MSYS2                            | [BUILD_MSYS2.md](BUILD_MSYS2.md)     |
+-| From Linux                             | Run: `make win`                      |
+-
+----
++| Method                              | Documentation                      |
++|-------------------------------------|------------------------------------|
++| Android                             | [BUILD_Android.md](BUILD_Android.md)   |
++| From macOS                          | [BUILD_macOS.md](BUILD_macOS.md)   |
++| Using Windows Subsystem for Linux (WSL) | [BUILD_WSL.md](BUILD_WSL.md)     |
++| Using Cygwin                        | [BUILD_CYGWIN.md](BUILD_CYGWIN.md) |
++| Using MSYS2                         | [BUILD_MSYS2.md](BUILD_MSYS2.md)   |
++| From Linux                          | Run: `make win`                    |
+ 
+ ## 🎉 Done
+ 

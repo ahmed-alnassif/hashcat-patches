@@ -1,0 +1,28 @@
+--- src/affinity.c	2025-11-02 22:21:51.686213716 +0300
++++ src/affinity.c	2025-11-10 19:05:59.198040032 +0300
+@@ -7,6 +7,10 @@
+ #include "types.h"
+ #include "memory.h"
+ #include "event.h"
++#if defined(__ANDROID__)
++#include <sched.h>
++#include <unistd.h>
++#endif
+ #include "affinity.h"
+ 
+ #if defined (__APPLE__)
+@@ -181,8 +185,12 @@
+ 
+   pthread_t thread = pthread_self ();
+ 
+-  const int rc = pthread_setaffinity_np (thread, sizeof (cpu_set_t), &cpuset);
+-
++  #if defined(__ANDROID__)
++    const int rc = sched_setaffinity (gettid(), sizeof (cpu_set_t), &cpuset);
++  #else
++    const int rc = pthread_setaffinity_np (thread, sizeof (cpu_set_t), &cpuset);
++  #endif
++  
+   if (rc != 0)
+   {
+     event_log_error (hashcat_ctx, "pthread_setaffinity_np() failed with error: %d", rc);
