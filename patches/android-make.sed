@@ -1,3 +1,5 @@
+# Android Makefile Patches
+
 # 1. Add Android detection after UNAME line
 /UNAME.*:=.*shell uname -s/a\
 \
@@ -10,7 +12,7 @@ endif
 # 2. Add Android to supported OS filter
 /ifeq (,$(filter \$(UNAME),.*Linux.*OpenBSD.*FreeBSD.*NetBSD.*DragonFly.*Darwin.*CYGWIN.*MSYS2))/s/\(Linux\)\(.*OpenBSD.*FreeBSD.*NetBSD.*DragonFly.*Darwin.*CYGWIN.*MSYS2\)/Android \1\2/
 
-# 3. ONLY replace the main Linux compilation section (around line 458)
+# 3. Replace Linux section with Android + Linux (FIXED with proper endif)
 /^## Native compilation target$/,/^endif # Linux/ {
     /^ifeq (\$(UNAME),Linux)$/i\
 ifeq ($(UNAME),Android)\
@@ -25,6 +27,10 @@ ifeq ($(UNAME),Android)\
   LFLAGS_NATIVE           += -L$(PREFIX)/lib\
   $(info Android environment detected.)\
 else
-    
-    s/^ifeq (\$(UNAME),Linux)$/ifeq ($(UNAME),Linux)/
+
+    /^endif # Linux$/a\
+endif # Android
 }
+
+# 4. Fix the Linux section to be else if (but keep original since we're using else above)
+# This line is now optional since we're using the "else" approach above
